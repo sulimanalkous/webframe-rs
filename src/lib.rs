@@ -3,6 +3,7 @@ pub mod components {
     pub mod button;
     pub mod form;
     pub mod input;
+    pub mod list;
     pub mod raw;
 }
 
