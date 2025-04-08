@@ -9,7 +9,6 @@ Use it to compose clean, reusable components (like `<form>`, `<input>`, `<button
 
 - ✅ Component trait for easy `.render()` output
 - 🧱 Builder-style API for ergonomic use
-- 🎨 Optional themes (Tailwind, Bootstrap, or your own)
 - 🧩 Works with Askama and Axum
 - 🛠️ Fully customizable: add attributes, classes, raw blocks
 
