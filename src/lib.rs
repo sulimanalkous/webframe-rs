@@ -5,6 +5,9 @@ pub mod components {
     pub mod input;
     pub mod list;
     pub mod raw;
+    pub mod select;
+    pub mod table;
+    pub mod textarea;
 }
 
 #[cfg(test)]

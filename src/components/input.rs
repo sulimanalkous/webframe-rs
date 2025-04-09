@@ -1,6 +1,9 @@
 use crate::component::Component;
 use std::collections::HashMap;
 
+//
+// * FieldType
+//
 #[derive(Clone)]
 pub enum FieldType {
     Text,
@@ -40,6 +43,9 @@ impl FieldType {
     }
 }
 
+//
+// * Input
+//
 pub struct Input {
     pub name: String,
     pub input_type: FieldType,
@@ -98,5 +104,69 @@ impl Component for Input {
             self.class.clone().unwrap_or_default(),
             attrs
         )
+    }
+}
+
+//
+// * FileInput
+//
+pub struct FileInput {
+    inner: Input,
+}
+
+impl FileInput {
+    pub fn new(name: impl Into<String>) -> Self {
+        Self {
+            inner: Input::new(name).input_type(FieldType::File),
+        }
+    }
+
+    pub fn multiple(mut self, enable: bool) -> Self {
+        if enable {
+            self.inner = self.inner.with_attr("multiple", "true");
+        }
+        self
+    }
+
+    pub fn class(mut self, class: impl Into<String>) -> Self {
+        self.inner = self.inner.class(class);
+        self
+    }
+
+    pub fn with_attr(mut self, k: impl Into<String>, v: impl Into<String>) -> Self {
+        self.inner = self.inner.with_attr(k, v);
+        self
+    }
+}
+
+impl Component for FileInput {
+    fn render(&self) -> String {
+        self.inner.render()
+    }
+}
+
+//
+// * HiddenInput
+//
+pub struct HiddenInput {
+    inner: Input,
+}
+
+impl HiddenInput {
+    pub fn new(name: impl Into<String>, value: impl Into<String>) -> Self {
+        Self {
+            inner: Input::new(name).input_type(FieldType::Hidden).value(value),
+        }
+    }
+
+    pub fn with_attr(mut self, k: impl Into<String>, v: impl Into<String>) -> Self {
+        self.inner = self.inner.with_attr(k, v);
+        self
+    }
+}
+
+impl Component for HiddenInput {
+    fn render(&self) -> String {
+        self.inner.render()
     }
 }
